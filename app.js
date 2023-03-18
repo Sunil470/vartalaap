@@ -15,7 +15,7 @@ const config = {
     authRequired: false,
     auth0Logout: true,
     secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'https://vartalaap-rueb.onrender.com',
+    baseURL: 'http://139.59.93.186:500',
     clientID: 'iMSMvoulDBaSBQlQ3TgGFN0RUzHeytY2',
     issuerBaseURL: 'https://dev-vrdpq0akts13bxty.us.auth0.com'
   };
@@ -79,6 +79,6 @@ app.get('./home', (req, res) => {
 
 
 
-server.listen(process.env.PORT || 3000, () => {
+server.listen(process.env.PORT || 5000, () => {
         console.log(`Server started on port ${server.address().port} :)`);
     });
