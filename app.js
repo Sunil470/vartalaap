@@ -15,7 +15,7 @@ const config = {
     authRequired: false,
     auth0Logout: true,
     secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://vartalaap-rueb.onrender.com',
     clientID: 'iMSMvoulDBaSBQlQ3TgGFN0RUzHeytY2',
     issuerBaseURL: 'https://dev-vrdpq0akts13bxty.us.auth0.com'
   };
