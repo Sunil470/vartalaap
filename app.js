@@ -1,6 +1,6 @@
 const express = require('express');
 const {auth} = require('express-openid-connect');
-const ws = require('ws');
+const ws = require('wss');
 const http = require('http');
 const app = express();
 const ejs = require('ejs')
