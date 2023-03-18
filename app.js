@@ -15,7 +15,7 @@ const config = {
     authRequired: false,
     auth0Logout: true,
     secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://139.59.93.186:500',
+    baseURL: 'http://139.59.93.186:5000',
     clientID: 'iMSMvoulDBaSBQlQ3TgGFN0RUzHeytY2',
     issuerBaseURL: 'https://dev-vrdpq0akts13bxty.us.auth0.com'
   };
