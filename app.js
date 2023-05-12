@@ -4,9 +4,12 @@ const ws = require('ws');
 const http = require('http');
 const app = express();
 const ejs = require('ejs')
+const env = require('dotenv');
+env.config();
 app.set('view engine', 'ejs');
 app.use(express.json())
 app.use(express.static('public'));
+
 const server = http.createServer(app);
 const wss = new ws.Server({ server });
 
@@ -14,10 +17,10 @@ const wss = new ws.Server({ server });
 const config = {
     authRequired: false,
     auth0Logout: true,
-    secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://139.59.93.186:5000',
-    clientID: 'iMSMvoulDBaSBQlQ3TgGFN0RUzHeytY2',
-    issuerBaseURL: 'https://dev-vrdpq0akts13bxty.us.auth0.com'
+    secret: process.env.secret,
+    baseURL: "http://" + process.env.baseURL + ":" + process.env.PORT,
+    clientID: process.env.clientID,
+    issuerBaseURL: process.env.issuerBaseURL,
   };
 app.use(auth(config));
 const { requiresAuth } = require('express-openid-connect');
@@ -34,9 +37,9 @@ wss.on('connection', function(user){
             ele.send(msg.data)
         });
     }
-    // user.on('close', (user)=>{
-    //    console.log(server.clients.size)
-    // })
+    user.on('close', (user)=>{
+       console.log(server.clients.size)
+    })
     
     })
 
@@ -49,13 +52,9 @@ if (req.oidc.isAuthenticated()){
 }
 }
 
-// app.get('/', authenticate, requiresAuth(), (req, res) => {
-//     let userData = req.oidc.user;
-//     //console.log(userData)
-//     res.render('index', {userData})
-// });
-app.get('/', authenticate,(req, res) => {
-    res.render('index')
+app.get('/',authenticate,requiresAuth(),(req, res) => {
+    let userData = req.oidc.user;
+    res.render('index', {userData})
 });
 app.get('/userinfo', requiresAuth(), (req, res) => {
     let userData = req.oidc.user;
@@ -68,12 +67,12 @@ app.get('/profile', requiresAuth(), (req, res) => {
     res.render('profile', {userData});
   });
 
-app.get('./chat', (req, res) => {
+app.get('/chat', (req, res) => {
     res.render('chat');
 });
-app.get('./home', (req, res) => {
-    res.render('home');
-});
+// app.get('./home', (req, res) => {
+//     res.render('home');
+// });
 
 
 

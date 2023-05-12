@@ -192,3 +192,33 @@ h3 > small {
   color: #afafaf;
   font-weight: normal;
 }
+.chat-box-header h3{
+  float: left;
+}
+.top-p{float: right;}
+.top-p .pic{
+  border-radius: 100%;
+  vertical-align: middle;
+  margin-right: 10px;;
+}
+.top-p .logout{
+  color: #afafaf;
+  text-decoration: none;
+}
+.user-list{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+.user-list .list-item{
+  margin-bottom: 10px;
+  width: 200px;
+}
+.user-list .list-item img{
+  border-radius: 100%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.user-list .list-item span{
+  text-decoration: none;
+}

@@ -9,9 +9,12 @@
 <body>
 <!-- partial:index.partial.html -->
 <div class="flexbox">
+  <div id="user_list" class="user-list">
+  </div>
   <div class="chat-box">
     <div class="chat-box-header">
       <h3>Some Chat Room<br /><small>Last active: 0 min ago</small></h3>
+      <span class="top-p"><img class="pic" src="<%=userData.picture%>" width="40" height="40" /><a class="logout" href="logout">Logout</a></span>
     </div>
     <div id="chat_box_body" class="chat-box-body">
       <div id="chat_messages">
@@ -37,35 +40,34 @@
   <!-- <script  src="./script.js"></script> -->
   <script>
            
-    let ws = new WebSocket("ws://139.59.93.186:5000")
+    let ws = new WebSocket("ws://localhost:5000")
     
     fetch("/userinfo").then((res)=>{
       return res.json()
     }).then((f_res)=>{
-
          let name = f_res.userData.name
          let photo = f_res.userData.picture
-
          localStorage.setItem("data", JSON.stringify({name, photo}))
+         
     })
-
-
+    
 
     ws.onmessage = function(msg)
     {  
        let temp = JSON.parse(msg.data)
        // msg.data = '{"msg": "Hello my name is Ayush", "data": {"name": "Ayush", "photo": "http://photo.com"}}'
        document.getElementById("chat_messages").innerHTML += `<div class="profile other-profile">
-          <img src="${temp.data.photo}" width="30" height="30" />
-          <span>${temp.data.name}</span>
+        <img src="${temp.data.photo}" width="30" height="30" />
+        <span>${temp.data.name}</span>
         </div>
         <div id="other_chat" class="message other-message">
           ${temp.msg}
         </div>`
+        document.getElementById("user_list").innerHTML += `<div class="list-item"><img class="pic" src="${photo}" width="40" height="40" /><span>${name}</span></div>`
+        
     }
 
- function send()
-   {    
+ function send(){    
 
        
         let msg = document.getElementById("chatBox").value
